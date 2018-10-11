@@ -1,5 +1,5 @@
 #声明#
 
-author carl，cat
+author coding_carl，miss_cat
 
-ssm-web test
+ssm framework mobile web project 
