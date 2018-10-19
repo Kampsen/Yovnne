@@ -1,4 +1,4 @@
-package com.yovnne.client.controller;
+package com.yovnne.controller;
 
 
 import com.yovnne.model.Account;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/account")     // yovnne/account
 public class AccountController {
 
     private static Logger log = LoggerFactory.getLogger(AccountController.class);
@@ -28,22 +28,24 @@ public class AccountController {
     @Resource
     private IAccountService accountService;
 
-    @RequestMapping(value="/test",method = RequestMethod.GET)    // /user/test?id=1
+    // /account/test?id=1
+    @RequestMapping(value="/test",method = RequestMethod.GET)
     public String test(HttpServletRequest request, Model model){
         int userId = Integer.parseInt(request.getParameter("id"));
-        System.out.println("userId:"+userId);
+        System.out.println("AccountController--userId:"+userId);
         Account user=null;
         if (userId==1) {
             user = new Account();
             user.setId("1");
             user.setAccount("java");
             user.setPassword("javaweb");
+            log.debug(user.toString());
         }
-        log.debug(user.toString());
+        //System.out.println(System.getProperty("user.dir"));
         model.addAttribute("user", user);
         return "index";
     }
-    // /user/showUser?id=1
+    // /account/showUser?id=1
     @RequestMapping(value="/showUser",method=RequestMethod.GET)
     public String toIndex(HttpServletRequest request,Model model){
         int userId = Integer.parseInt(request.getParameter("id"));
@@ -54,7 +56,7 @@ public class AccountController {
         return "showUser";
     }
 
-    // /user/showUser2?id=1
+    // /account/showUser2?id=1
     @RequestMapping(value="/showUser2",method=RequestMethod.GET)
     public String toIndex2(@RequestParam("id") String id, Model model){
         int userId = Integer.parseInt(id);
@@ -66,7 +68,7 @@ public class AccountController {
     }
 
 
-    // /user/showUser3/{id}
+    // /account/showUser3/{id}
     @RequestMapping(value="/showUser3/{id}",method=RequestMethod.GET)
     public String toIndex3(@PathVariable("id")String id, Map<String, Object> model){
         int userId = Integer.parseInt(id);
@@ -77,7 +79,7 @@ public class AccountController {
         return "showUser";
     }
 
-    // /user/{id}
+    // /account/{id}
     @RequestMapping(value="/{id}",method=RequestMethod.GET)
     public @ResponseBody
     Account getUserInJson(@PathVariable String id, Map<String, Object> model){
@@ -88,7 +90,7 @@ public class AccountController {
         return user;
     }
 
-    // /user/{id}
+    // /account/{id}
     @RequestMapping(value="/jsontype/{id}",method=RequestMethod.GET)
     public ResponseEntity<Account> getUserInJson2(@PathVariable String id, Map<String, Object> model){
         int userId = Integer.parseInt(id);
@@ -98,12 +100,12 @@ public class AccountController {
         return new ResponseEntity<Account>(user, HttpStatus.OK);
     }
 
-    //文件上传、
+    //文件上传、  account/upload
     @RequestMapping(value="/upload")
     public String showUploadPage(){
         return "user_admin/file";
     }
-
+    //account/doupload
     @RequestMapping(value="/doUpload",method=RequestMethod.POST)
     public String doUploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yovnne-client</artifactId>
+    <artifactId>yovnne-core</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 

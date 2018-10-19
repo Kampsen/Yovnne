@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h1>WEB-INF,hello world</h1>
+<h1>WEB-INF,${user.account},hello world</h1>
 
 </body>
 </html>
